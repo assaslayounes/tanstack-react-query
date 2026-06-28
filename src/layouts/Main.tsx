@@ -15,6 +15,12 @@ const Main = () => {
               <Nav.Link as={NavLink} to="/">
                 Home
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/info">
+                Info
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/create">
+                Create
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
