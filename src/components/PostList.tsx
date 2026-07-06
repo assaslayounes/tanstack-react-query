@@ -28,7 +28,7 @@ const PostList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((post, index) => (
+                    {data?.map((post, index) => (
                         <tr key={post.id}>
                             <td>{++index}</td>
                             <td>
