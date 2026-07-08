@@ -17,7 +17,8 @@ const useGetPosts = () => {
 
   return useQuery({
     queryKey: ["getPosts"],
-    queryFn: fetchPosts
+    queryFn: fetchPosts,
+    staleTime: 1000 *  5, // 5 soeconds
   });
 
 }

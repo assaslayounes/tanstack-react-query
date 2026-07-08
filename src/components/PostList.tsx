@@ -38,7 +38,8 @@ const PostList = () => {
                             <td style={{ textAlign: "center" }}>
                                 <Form.Check // prettier-ignore
                                     type="switch"
-                                /> {post.topRate}
+                                    checked={post.topRate}
+                                /> 
                             </td>
                             <td>
                                 <ButtonGroup aria-label="Basic example">
