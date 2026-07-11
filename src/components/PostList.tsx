@@ -2,9 +2,14 @@
 import { Table, Col, Form, ButtonGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useGetPosts from "../hooks/useGetPosts";
-const PostList = () => {
+import { TPostStatus } from "../types";
 
-    const { data, isLoading, isError, error } = useGetPosts();
+interface PostListProps {
+  selectedPostStatus: TPostStatus;
+}
+const PostList = ({ selectedPostStatus }: PostListProps) => {
+
+    const { data, isLoading, isError, error } = useGetPosts(selectedPostStatus);
 
     if (isLoading) {
         return <div>Loading...</div>;
