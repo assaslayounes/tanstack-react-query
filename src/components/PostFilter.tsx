@@ -1,4 +1,4 @@
-import { Col, Form} from "react-bootstrap";
+import { Form} from "react-bootstrap";
 import { TPostStatus } from "../types";
 
 interface PostFilterProps {
@@ -12,7 +12,7 @@ const PostFilter = ({ selectedPostStatus, setSelectedPostStatus }: PostFilterPro
   }
 
   return (
-    <Col>
+    <>
         <h5>Filter By Status</h5>
         <Form.Select value={selectedPostStatus} onChange={onChangeHandler}>
           <option value="all">All</option>
@@ -20,7 +20,7 @@ const PostFilter = ({ selectedPostStatus, setSelectedPostStatus }: PostFilterPro
           <option value="draft">Draft</option>
           <option value="block">Block</option>
         </Form.Select>
-      </Col>
+      </>
   )
 }
 

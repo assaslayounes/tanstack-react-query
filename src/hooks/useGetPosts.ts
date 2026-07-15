@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { TPost, TPostStatus } from "../types";
 
 
@@ -11,7 +11,7 @@ const fetchPosts = async (selectedPostStatus: TPostStatus): Promise<TPost[]> => 
   const result = await axios.get<TPost[]>(`http://localhost:5000/posts?status=${selectedPostStatus}`);
   return result.data;
 }
-const useGetPosts = (selectedPostStatus: TPostStatus) => {
+const useGetPosts = (selectedPostStatus: TPostStatus):UseQueryResult<TPost[]> => {
 
   return useQuery({
     queryKey: ["getPosts", selectedPostStatus],
