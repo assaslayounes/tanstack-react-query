@@ -11,12 +11,13 @@ const fetchPosts = async (selectedPostStatus: TPostStatus): Promise<TPost[]> => 
   const result = await axios.get<TPost[]>(`http://localhost:5000/posts?status=${selectedPostStatus}`);
   return result.data;
 }
-const useGetPosts = (selectedPostStatus: TPostStatus):UseQueryResult<TPost[]> => {
+const useGetPosts = (selectedPostStatus: TPostStatus): UseQueryResult<TPost[]> => {
 
   return useQuery({
     queryKey: ["getPosts", selectedPostStatus],
-    queryFn: () => fetchPosts(selectedPostStatus) ,
-    staleTime: 1000 *  5, // 5 soeconds
+    queryFn: () => fetchPosts(selectedPostStatus),
+    staleTime: 1000 * 5, // 5 soeconds
+    refetchInterval: 1000 * 60,
   });
 
 }

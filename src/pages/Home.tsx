@@ -9,7 +9,7 @@ import SearchQuery from "../components/SearchQuery";
 const Home = () => {
   const [selectedPostStatus, setSelectedPostStatus] = useState<TPostStatus>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   console.log("Home - searchQuery", searchQuery);
 
   return (
@@ -20,9 +20,9 @@ const Home = () => {
       <Col>
         <SearchQuery searchQuery={searchQuery}
           setSearchQuery={setSearchQuery} />
-        <PostFilter selectedPostStatus={selectedPostStatus}
+        {searchQuery?.length === 0 && (<PostFilter selectedPostStatus={selectedPostStatus}
           setSelectedPostStatus={setSelectedPostStatus}
-        />
+        />)}
       </Col>
     </Row>
   );

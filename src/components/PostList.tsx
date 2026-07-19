@@ -11,7 +11,7 @@ interface PostListProps {
 }
 const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
-    const { data, isLoading, isError, error } = useGetPosts(selectedPostStatus);
+    const { data, isLoading, isError, error, isStale, refetch } = useGetPosts(selectedPostStatus);
     const { data: searchData, isLoading: isSearchLoading, isError: isSearchError, error: searchError } = useSearch(searchQuery);
 
     console.log("PostList - searchQuery", searchQuery);
@@ -32,6 +32,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
     return (
 
         <>
+            {isStale && searchQuery.length === 0 && (<Button variant="success" className="mb-3" onClick={() => refetch()}>Refresh</Button>)}
             <Table striped bordered hover>
                 <thead>
                     <tr>
