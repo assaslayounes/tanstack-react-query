@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useGetPosts from "../hooks/useGetPosts";
 import useSearch from "../hooks/useSearch";
 import { TPostStatus } from "../types";
+import { useState } from "react";
 
 interface PostListProps {
     selectedPostStatus: TPostStatus;
@@ -11,7 +12,8 @@ interface PostListProps {
 }
 const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
-    const { data, isLoading, isError, error, isStale, refetch } = useGetPosts(selectedPostStatus);
+    const [paginate, setPaginate] = useState(1);
+    const { data, isLoading, isError, error, isStale, refetch } = useGetPosts(selectedPostStatus,paginate);
     const { data: searchData, isLoading: isSearchLoading, isError: isSearchError, error: searchError } = useSearch(searchQuery);
 
     console.log("PostList - searchQuery", searchQuery);
@@ -87,6 +89,15 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
                 </tbody>
             </Table>
+            {searchQuery?.length === 0 && selectedPostStatus === "all" && (
+                <div className="d-flex justify-content-center">
+                    <ButtonGroup aria-label="Basic example" className="mb-3">
+                        <Button variant={paginate === 1 ? "primary" : "secondary"} onClick={() => setPaginate(1)}>1</Button>
+                        <Button variant={paginate === 2 ? "primary" : "secondary"} onClick={() => setPaginate(2)}>2</Button>
+                        <Button variant={paginate === 3 ? "primary" : "secondary"} onClick={() => setPaginate(3)}>3</Button>
+                    </ButtonGroup>
+                </div>
+            )}
         </>
     )
 }
