@@ -6,7 +6,7 @@ import useSearch from "../hooks/useSearch";
 import { TPostStatus } from "../types";
 import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import {fetchPosts} from "../hooks/useGetPosts";
+import { fetchPosts } from "../hooks/useGetPosts";
 
 interface PostListProps {
     selectedPostStatus: TPostStatus;
@@ -15,7 +15,7 @@ interface PostListProps {
 const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
     const [paginate, setPaginate] = useState(1);
-    const { data, isLoading, isError, error, isStale, refetch } = useGetPosts(selectedPostStatus,paginate);
+    const { data, isLoading, isError, error, isStale, refetch } = useGetPosts(selectedPostStatus, paginate);
     const { data: searchData, isLoading: isSearchLoading, isError: isSearchError, error: searchError } = useSearch(searchQuery);
     const queryClient = useQueryClient();
 
@@ -24,7 +24,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
         const nextPage = paginate + 1;
         if (nextPage <= 3) {
             queryClient.prefetchQuery({
-                queryKey: ["getPosts", { selectedPostStatus:"all", paginate: nextPage }],
+                queryKey: ["getPosts", { selectedPostStatus: "all", paginate: nextPage }],
                 queryFn: () => fetchPosts("all", nextPage),
             })
         }
@@ -62,7 +62,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
                         <tr key={post.id}>
                             <td>{++index}</td>
                             <td>
-                                <Link to="/info">{post.title}</Link>
+                                <Link to={`/info?id=${post.id}&type=paginate&key=${paginate}`}>{post.title}</Link>
                             </td>
                             <td>{post.status}</td>
                             <td style={{ textAlign: "center" }}>
@@ -82,7 +82,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
                         <tr key={post.id}>
                             <td>{++index}</td>
                             <td>
-                                <Link to="/info">{post.title}</Link>
+                                <Link to={`/info?id=${post.id}&type=search&key=${searchQuery}`}>{post.title}</Link>
                             </td>
                             <td>{post.status}</td>
                             <td style={{ textAlign: "center" }}>
