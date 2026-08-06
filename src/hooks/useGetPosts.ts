@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { TPost, TPostStatus } from "../types";
 
 
-const fetchPosts = async (selectedPostStatus: TPostStatus, paginate: number): Promise<TPost[]> => {
+export const fetchPosts = async (selectedPostStatus: TPostStatus, paginate: number): Promise<TPost[]> => {
   if (selectedPostStatus === "all") {
     const result = await axios.get<TPost[]>(`http://localhost:5000/posts?_page=${paginate}&_limit=5`);
     return result.data;
